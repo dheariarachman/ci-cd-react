@@ -19,5 +19,15 @@ pipeline {
                 }
             }
         }
+
+        stage('clear bucket') {
+          steps {
+            script {
+              withAWS(region:'ap-southeast-1', credentials:'aws-credentials-learn') {
+                sh 'aws s3 ls'
+              }
+            }
+          }
+        }
     }
 }
