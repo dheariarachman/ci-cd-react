@@ -25,6 +25,8 @@ pipeline {
             script {
               withAWS(region:'ap-southeast-1', credentials:'aws-credentials-learn') {
                 sh 'aws s3 ls'
+                sh 'aws s3 rm s3://ci-cd-react --recursive'
+                sh 'aws s3 sync build/ s3://ci-cd-react'
               }
             }
           }
