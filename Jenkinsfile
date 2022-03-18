@@ -2,13 +2,13 @@ pipeline {
   agent any
 
   stages {
-    stage('Clone the Repo') {
-      steps {
-        checkout scm
-      }
-    }
+    // stage('Clone the Repo') {
+    //   steps {
+    //     checkout scm
+    //   }
+    // }
     
-    stage('Stage 2 - Build Projects') {
+    stage('Stage - Build Projects') {
         steps {
             // dir('ci-cd-react') {
             //   sh "npm install"
@@ -29,5 +29,20 @@ pipeline {
     //     }
     //   }
     // }
+  }
+
+  post {
+    cleanup {
+        /* clean up our workspace */
+        deleteDir()
+        /* clean up tmp directory */
+        dir("${workspace}@tmp") {
+            deleteDir()
+        }
+        /* clean up script directory */
+        dir("${workspace}@script") {
+            deleteDir()
+        }
+    }
   }
 }
