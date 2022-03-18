@@ -13,6 +13,7 @@ pipeline {
         stage('Stage 2 - Build Projects') {
             steps {
                 dir('ci-cd-react') {
+                  sh "npm run build"
                   sh "ls -l"
                 }
             }
